@@ -1,0 +1,62 @@
+<div id="container">
+    <!-- populated by JS-->
+  </div>
+  <script src="./boston.js"></script>
+  <script>
+    // function renderBoston(boston, container) {
+    //   var person = boston.data; 
+    //   var len = boston.data.length;
+    //   var html = '';
+    //   for (let i = 0; i < len; i++) {
+    //     html += '<li class="post">' +
+    //       '<h2>' + person[i][8] + '</h2>' +
+    //       '<h3>' + person[i][18] + '</h3>';
+    //   }
+    //   container.innerHTML = '<ul id = "boston">' + html + '</ul>';
+    // }
+    // renderBoston(boston, document.getElementById('container'));
+  
+  // top 5 earners in Boston (total salary + overtime) and list them out in the web page as shown below:
+  // Name     Total Earned 
+  
+  function top5SalaryEarners(boston, container) {
+    var person = boston.data;
+    var bestPaidFive = person.sort((a,b) => b[18] - a[18]).slice(0,5);
+    var lengthbestPaidFive = bestPaidFive.length;
+    var html = '';
+  
+    for(let i = 0; i < lengthbestPaidFive; i++) {
+      html += '<li class="five">' +
+        '<h2>' + bestPaidFive[i][8] + '</h2>' +
+        '<h3>' + bestPaidFive[i][18] + '</h3>';
+    }
+    container.innerHTML = `<ul id = "isSalaryOver"> <h1> The top 5 earners in Boston are: </h1>  ${html} </ul>`;
+  }
+  
+  top5SalaryEarners(boston,document.getElementById('container'));
+  
+  
+  // employees over 100k
+  
+  // function isSalaryOver100K(boston, container) {
+  //     var person = boston.data; 
+  //     var threshold = 100000;
+  //     var resultFilteredSalaries = person.filter(result).sort((a,b) => b[18] - a[18]);
+  //     function result (a) {
+  //       return a[18] > threshold;
+  //     };
+  //     var lengthresultFilteredSalaries = resultFilteredSalaries.length;
+  //     var html = '';
+  
+  
+  //     for (let i = 0; i < lengthresultFilteredSalaries; i++) {
+  //       html += '<li class="over">' + 
+  //         '<h2>' + resultFilteredSalaries[i][8] + '</h2>' + 
+  //         '<h3>' + resultFilteredSalaries[i][18] + '</h3>';
+  //     } 
+  //     container.innerHTML = `<ul id = "isSalaryOver"> <h1> Number of people working in Boston earning over $100,000 is ${lengthresultFilteredSalaries} </h1>  ${html} </ul>`;
+  // }
+  //   isSalaryOver100K(boston, document.getElementById('container'));
+  
+  
+  </script>
