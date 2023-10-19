@@ -8,9 +8,9 @@ For this excersice I  use JavaScript language. This is a a dynamic website desig
 
 Some of this features are sorting and filtering data whichs are essential features that enable users to organize and navigate large datasets effectively:
 
- **Sorting Data: Sorting involves arranging data in a specified order, typically in ascending (from lowest to highest) or descending (from highest to lowest) sequence. It helps users quickly identify patterns, trends, and outliers within the dataset. For example, you can sort a list of names alphabetically, or you can sort a list of numbers in ascending or descending numerical order.
+ **Sorting Data:** Sorting involves arranging data in a specified order, typically in ascending (from lowest to highest) or descending (from highest to lowest) sequence. It helps users quickly identify patterns, trends, and outliers within the dataset. For example, you can sort a list of names alphabetically, or you can sort a list of numbers in ascending or descending numerical order.
 
- **Filtering Data: Filtering allows users to narrow down the dataset to view only the specific information they need. You can filter data based on certain criteria or conditions. For instance, you can filter a list of employees to show only those from a particular department, or you can filter a list of products to display only those within a certain price range. This feature is especially useful when you want to extract relevant information from a large dataset.
+ **Filtering Data:** Filtering allows users to narrow down the dataset to view only the specific information they need. You can filter data based on certain criteria or conditions. For instance, you can filter a list of employees to show only those from a particular department, or you can filter a list of products to display only those within a certain price range. This feature is especially useful when you want to extract relevant information from a large dataset.
 
 ## Usage:
 
