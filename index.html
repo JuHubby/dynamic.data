@@ -2,123 +2,180 @@
 <head>
     <style>
       body, html {
-        height: 10%;
-        margin: 2%;
+      height: 10%;
+      margin: 1%;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: white;
+      }
+
+      .header {
+        padding: 60px;
+        text-align: center;
+        background: #deebe8;
+        color: rgba(11, 11, 11, 0.8);
+        font-size: 30px;
+      }
+
+      div {
+        #employees {
         font-family: Arial, Helvetica, sans-serif;
-        background-color: white;
-    }
-      h2 {
-        background-color: white;
-    }
+        border-collapse: collapse;
+        width: 100%;
+        }
+        #employees td, #employees th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        }
+        #employees tr:nth-child(even){background-color: #f2f2f2;}
+        #employees tr:hover {background-color: #ddd;}
+        #employees th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #02061ce4;
+        color: white;
+        }
+      }
 
-    div {
-    
-#employees {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#employees td, #employees th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#employees tr:nth-child(even){background-color: #f2f2f2;}
-
-#employees tr:hover {background-color: #ddd;}
-
-#employees th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
-}
-    }
+      .btn-group .button {
+        background-color: #cb9f0e; 
+        border: none;
+        border-radius: 15px;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 20px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+      }
+      .btn-group .button:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+      }
 
 
-    </style>  
+    </style> 
+
     <title>Dynamic Tables</title>
-  </head>
- 
-  <body>
-    <h1 style="font-size:50px">Dynamic Tables</h1>
-    <p></p>
 
-    <div id="container">
-      <!-- populated by JS-->
-    </div>
+</head>
+
+    <body>
+
+      <div class="header">
+        <h1>Dynamic Tables</h1>
+        <h2>Boston Salary Database with 20,000+ Entries</h2>
+      </div>
+
+      <div style="text-align:center" class="btn-group">
+        <button class="button" onclick="renderBostonSortByNames(boston, document.getElementById('container'));">Sort Alphabetically By Name</button>
+        <button class="button" onclick="sortBestSalaryFirst(boston, container)">Sort Salary in Descending Order</button>
+        <button class="button" onclick="top5SalaryEarners(boston, container)">Show Top 5 Salaries</button>
+      </div>
+
+      <div style="text-align:center" id="container">
+        <!-- populated by JS-->
+      </div>
     
   <script src="./boston.js"></script>
   <script>
-    // function renderBoston(boston, container) {
-    //   var person = boston.data; 
-    //   var len = boston.data.length;
-    //   var html = '';
-    //   for (let i = 0; i < len; i++) {
-    //     html += '<li class="post">' +
-    //       '<h2>' + person[i][8] + '</h2>' +
-    //       '<h3>' + person[i][18] + '</h3>';
-    //   }
-    //   container.innerHTML = '<ul id = "boston">' + html + '</ul>';
-    // }
-    // renderBoston(boston, document.getElementById('container'));
+    
+    //total employees of Boston and salaries
+  function renderBoston(boston, container) {
+      var person = boston.data; 
+      var len = boston.data.length;
+      var html = '';
+      for (let i = 0; i < len; i++) {
+
+        html += '<table id="employees">' +
+        '<tr>' + '<th>' + 'Employees Name'+ '</th>' +
+                 '<th>' + 'Salary' + '</th>' +
+        '</tr>' +
+        '<tr>' + '<td>' + person[i][8] + '</td>' +
+                 '<td> $' + person[i][18] + '</td>'+ 
+        '</tr>' +
+        '</table>';
+       
+    } 
+      container.innerHTML = `<ul id = "boston"> <h3> Salaries of ${len} Boston-based Employees: </h3> ${html} </ul>`;
+    }
   
-  // top 5 earners in Boston (total salary + overtime) and list them out in the web page as shown below:
-  // Name     Total Earned 
-  
-  function top5SalaryEarners(boston, container) {
+  renderBoston(boston, document.getElementById('container'));
+
+    // sort by names
+  function renderBostonSortByNames(boston, container) {
+      var person = boston.data; 
+      var employeesNameSorted = person.sort();
+      var lenEmployeesNameSorted = employeesNameSorted.length;
+      var html = '';
+      for (let i = 0; i < lenEmployeesNameSorted; i++) {
+
+        html += '<table id="employees">' +
+        '<tr>' + '<th>' + 'Employees Name'+ '</th>' +
+                 '<th>' + 'Salary' + '</th>' +
+        '</tr>' +
+        '<tr>' + '<td>' + employeesNameSorted[i][8] + '</td>' +
+                 '<td> $' + employeesNameSorted[i][18] + '</td>'+ 
+        '</tr>' +
+        '</table>';
+       
+    } 
+      container.innerHTML = `<ul id = "boston"> <h3> Arranged Boston Salaries by Employee Name in Descending Order: </h3> ${html} </ul>`;
+    }
+
+    // renderBostonSortByNames(boston, document.getElementById('container'));
+
+      // sort by salary
+    function sortBestSalaryFirst(boston, container) {
     var person = boston.data;
-    var bestPaidFive = person.sort((a,b) => b[18] - a[18]).slice(0,5);
-    var lengthbestPaidFive = bestPaidFive.length;
+    var bestSalaryEarnings = person.sort((a,b) => b[18] - a[18]);
+    var lengthbestSalaryEarnings = bestSalaryEarnings.length;
     var html = '';
-    var hoverText = '';
   
-    for(let i = 0; i < lengthbestPaidFive; i++) {
+    for(let i = 0; i < lengthbestSalaryEarnings; i++) {
       html += '<table id="employees">' +
         '<tr>' + '<th>' + 'Employees Name'+ '</th>' +
                  '<th>' + 'Salary' + '</th>' +
         '</tr>' +
-        '<tr>' + '<td>' + bestPaidFive[i][8] + '</td>' +
-                 '<td> $' + bestPaidFive[i][18] + '</td>'+ 
+        '<tr>' + '<td>' + bestSalaryEarnings[i][8] + '</td>' +
+                 '<td> $' + bestSalaryEarnings[i][18] + '</td>'+ 
         '</tr>' +
         '</table>';
-
-  
-  // '<li class="five">' +
-  //       '<h2>' + bestPaidFive[i][8] + '</h2>' +
-  //       '<h3>' + bestPaidFive[i][18] + '</h3>';
     }
 
-    container.innerHTML = `<ul id = "isSalaryOver"> <h1> The top 5 earners in Boston are: </h1>  ${html} </ul>`;
-  }
-  
-  top5SalaryEarners(boston,document.getElementById('container'));
-  
-  
-  // employees over 100k
-  
-  // function isSalaryOver100K(boston, container) {
-  //     var person = boston.data; 
-  //     var threshold = 100000;
-  //     var resultFilteredSalaries = person.filter(result).sort((a,b) => b[18] - a[18]);
-  //     function result (a) {
-  //       return a[18] > threshold;
-  //     };
-  //     var lengthresultFilteredSalaries = resultFilteredSalaries.length;
-  //     var html = '';
-  
-  
-  //     for (let i = 0; i < lengthresultFilteredSalaries; i++) {
-  //       html += '<li class="over">' + 
-  //         '<h2>' + resultFilteredSalaries[i][8] + '</h2>' + 
-  //         '<h3>' + resultFilteredSalaries[i][18] + '</h3>';
-  //     } 
-  //     container.innerHTML = `<ul id = "isSalaryOver"> <h1> Number of people working in Boston earning over $100,000 is ${lengthresultFilteredSalaries} </h1>  ${html} </ul>`;
-  // }
-  //   isSalaryOver100K(boston, document.getElementById('container'));
-  
+    container.innerHTML = `<ul id = "isSalaryOver"> <h3> Salaries in Boston Sorted from Highest to Lowest: </h3>  ${html} </ul>`;
+    }
+
+    // sortBestSalaryFirst(boston,document.getElementById('container'));  
+
+      // top 5 earners in Boston (total salary + overtime) and list them out in the web page as shown below:
+      // Name     Total Earned 
+    function top5SalaryEarners(boston, container) {
+      var person = boston.data;
+      var bestPaidFive = person.sort((a,b) => b[18] - a[18]).slice(0,5);
+      var lengthbestPaidFive = bestPaidFive.length;
+      var html = '';
+      var hoverText = '';
+
+      for(let i = 0; i < lengthbestPaidFive; i++) {
+        html += '<table id="employees">' +
+          '<tr>' + '<th>' + 'Employees Name'+ '</th>' +
+                    '<th>' + 'Salary' + '</th>' +
+          '</tr>' +
+          '<tr>' + '<td>' + bestPaidFive[i][8] + '</td>' +
+                    '<td> $' + bestPaidFive[i][18] + '</td>'+ 
+          '</tr>' +
+          '</table>';
+
+      }
+
+      container.innerHTML = `<ul id = "isSalaryOver"> <h3> The highest-earning 5 individuals in Boston are: </h3>  ${html} </ul>`;
+    }
+
+    // top5SalaryEarners(boston,document.getElementById('container'));
   
   </script>
   </body>
